@@ -11,7 +11,7 @@ public class Converter {
 		
 		while(menuSelection !='4') {
 			System.out.println("Please choose a conversion"
-					+"\n1.Cups to Teaspoons"
+					+"\n1 Cups to Teaspoons"
 					+ "\n2 Miles to Kilometeters"
 					+"\n3 US Gallons to Imperial Gallons"
 					+"\n4 Quit");
