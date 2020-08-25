@@ -6,14 +6,14 @@ public class EvenArray {
 
     public ArrayList<Integer> evenArray() {
 
-        ArrayList<Integer> EA = new ArrayList<Integer>(); //EA is the new ArrayList
+        ArrayList<Integer> EA = new ArrayList<Integer>(); //EA ArrayList is created
         
         //Populates 100 numbers
         for (int i=1; i<=100; i++) {
         	if (i % 2 ==0) {
         		EA.add(i);
         	}
-        	//Enhanced for loop to populate array with even numbers
+        	//Enhanced "for loop" to populate array with even numbers
         for (int even : EA) {
         	System.out.print(even + " ");
         }

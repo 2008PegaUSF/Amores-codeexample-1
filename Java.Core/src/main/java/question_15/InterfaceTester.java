@@ -1,6 +1,6 @@
 package question_15;
 
-public class InterfaceTester implements Solvers {
+public class InterfaceTester implements Solvers {          //Meat of the operations
 
 	    @Override
 	    public double add(double one, double two) {

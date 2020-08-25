@@ -6,7 +6,7 @@ public class InterestCalculator {
 	
 	public void InterestCalculator() {
 		
-		//Scanner needed for input; allows the user to create a 
+		//Scanner needed for input; allows the user to input key details to calculate the interest generated. 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Hello!" +'\n' + "Welcome to Revature Bank!");
 		
@@ -21,10 +21,10 @@ public class InterestCalculator {
 		
 		float interest = Interest(principle, years, rate);
 	
-		System.out.println("The interest generated is: " + interest);
+		System.out.println("The interest generated is: " + interest);     
 	}
 	
-	public static float Interest(float principle, float rate, float years) {
+	public static float Interest(float principle, float rate, float years) {   //Basic math to calculate the interest 
 		float interest = (principle*rate*years)/100;
 		return interest; 
 	}

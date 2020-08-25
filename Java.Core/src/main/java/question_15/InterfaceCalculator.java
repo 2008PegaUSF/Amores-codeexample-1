@@ -1,10 +1,10 @@
 package question_15;
 
-public class InterfaceCalculator  extends InterfaceTester {
+public class InterfaceCalculator  extends InterfaceTester {    //Actual main method
 
     public static void main(String[] args) {
 
-        InterfaceCalculator cal= new InterfaceCalculator();
+        InterfaceCalculator cal= new InterfaceCalculator(); 
         double d1 = 10;
         double d2= 9;
 

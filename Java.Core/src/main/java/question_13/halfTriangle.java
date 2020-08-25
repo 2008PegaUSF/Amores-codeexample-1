@@ -3,7 +3,7 @@ package question_13;
 public class halfTriangle {
 	
 	
- public static int halfTriangle() {
+ public int halfTriangle() {
         int z = 0;
         System.out.println(z); //first print out the first element 0
         

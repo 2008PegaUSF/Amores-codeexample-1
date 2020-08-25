@@ -25,15 +25,16 @@ public class AbstractSubClass extends AbstractString {
 
 	    @Override
 	    public String convertToUpper() {
-	        //this just cast myString to all uppercase letters
+	        //this just cast thatString to all uppercase letters
 	        return thatString.toUpperCase();
 	    }
 
 	    @Override
 	    public int convertToInt() {
 	        int num = 10;
-	        //since a string is scanned to add an integer to the string
-	        //type cast character by character
+	        //A string is scanned to add an integer to the string
+	        
+	        //Then that integer is casted char by char. 
 	        for(int i = 0; i<thatString.length();i++){
 	            num = num + (int)thatString.charAt(i);
 	        }

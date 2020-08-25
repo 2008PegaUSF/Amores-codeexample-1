@@ -1,8 +1,8 @@
 package question_16;
 
 public class Driver {
-	public static void main (String args) {
-		Cmd runCmd = new Cmd();
-		runCmd.Cmd(args);
+	public static void main (String st) {
+		Cmd runCMD = new Cmd();
+		runCMD.Cmd("Hello");
 	}
 }

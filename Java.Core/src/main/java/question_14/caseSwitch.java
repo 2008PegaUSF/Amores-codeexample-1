@@ -27,7 +27,7 @@ public class caseSwitch {
 		switch(choice) {
 		
 		case 1 :
-			System.out.println("Please input a number....");
+			System.out.println("Please input a number....");   //Inputs a number and provides the square root of that number
 			num = sc.nextFloat();
 			num2 = Math.sqrt(num);
 			System.out.println("The square root of the number: " +num+ " is: ");
@@ -39,24 +39,25 @@ public class caseSwitch {
 			break;
 			
 		case 3 :
-			String s = "I am learning Core Java";
+			String s = "I am learning Core Java";		//Splits the string and prints out the string back
 			String[] Split = s.split(" ");
 			printArr(Split);
 			break;
 			
 		
 		default: 
-			System.out.println("Why do you persist Mr. Anderson?");
+			System.out.println("Why do you persist Mr. Anderson?"); //Please enjoy the Matrix reference if you don't comply....
 			System.out.println("Please comply...." + '\n');
 			//caseSwitch();
 		}
-		
+		break;
 		}
+		
 		return x;
 } 
 
 	
-	public void printArr(String Split[]) {
+	public void printArr(String Split[]) {       //Separate method that is called to print out the new string.
 		int n = Split.length;
 		
 		for(int i= 0 ; i<n ; ++i) {
