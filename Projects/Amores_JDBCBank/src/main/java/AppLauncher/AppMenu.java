@@ -11,53 +11,70 @@ import bankImplements.BankCustomerImplement;
 
 
 public class AppMenu {
-	// Will contain most of the menu pages in this class... for BankAdmin and the Customers
-	
 	
 	static Scanner sc = new Scanner(System.in);
 	
 	//Customer Creation Portal *Initialized at the selection by the user in App Menu
 	public static void createCustomer() {
+		String F_NAME;
+		String L_NAME; 
+		String U_NAME;
+		String PW;
+		float Acc1;
+		
 		BankCustomerImplement customCreation = new BankCustomerImplement();
-		System.out.println("Thank you for choosing Saffron City Bank! \nPlease Enter your First Name");
-		String first = sc.next();
-		System.out.println("Please enter your Last Name");
-		String last = sc.next();
-		System.out.println("Please enter a unique user name");
-		String username = sc.next();
+		
+		System.out.println("Thank you for choosing Saffron City Bank!");
+		System.out.println("Please enter your first name");
+		F_NAME = sc.next();
+		
+		System.out.println("Please enter your last name");
+		L_NAME = sc.next();
+		
+		System.out.println("Please enter a  user name");
+		U_NAME = sc.next();
+		
 		System.out.println("please type in password");
-		String password = sc.next();
+		PW = sc.next();
+		
 		System.out.println("Thank you for creating an account!");
-		System.out.println("Please enter amount to be deposited: ");
-		float account1 = sc.nextFloat();
+		System.out.println("\nPlease enter amount to be deposited: ");
+		Acc1 = sc.nextFloat();
 		try {
-			customCreation.CreateNewCustomer(last, first, username, password, account1);
-			System.out.println("Account Created! \nWelcome! Please try logging in again with the username and password");
-			startMenu();
+			customCreation.CreateNewCustomer(L_NAME, F_NAME, U_NAME, PW, Acc1);
+			System.out.println("Account Created! \nWelcome!");
+			launchPortal();
 		} catch (SQLException e) {
-			System.out.println("Could not create Account and add to database\nPlease try again later");
+			System.out.println("Could not create Account \nPlease try again later");
 			e.printStackTrace();
 		}
 	}
 	
 
 	//Customer Login Portal Prompt
-	public static void customerLogin() {
+	public static void currentLogin() {
+		String currentPW;
+		String PW;
+		String user;
+		
+		BankCustomerImplement CDI = new BankCustomerImplement();
+		
 			System.out.println("Please enter account Username");
-			String user = sc.next();
-			BankCustomerImplement CDI = new BankCustomerImplement();	
+			user = sc.next();
+				
 			try {
 				Customer c = CDI.getCustomer_UN(user);
-				String actualpassword = c.getPassword();
+				currentPW = c.getPassword();
 				System.out.println("Please enter account password, otherwise please enter forgot password");
-				String password = sc.next();
-				if(actualpassword.equals(password)) {
+				PW = sc.next();
+				
+				if(currentPW.equals(PW)) {
 					customerWelcomeSN(c);
-				} else if(password.equals("forgot password")) {
-					startMenu();
+				} else if(PW.equals("forgot password")) {
+					launchPortal();
 				} else {
 					System.out.println("Password is incorrect");
-					customerLogin();
+					currentLogin();
 				}
 			} catch (SQLException e) {
 				System.out.println("User not found.");
@@ -70,18 +87,23 @@ public class AppMenu {
 	
 	//Administration Portal Login Prompt
 	public static void adminLogin() {
+		String user;
+		String currentPW;
+		
+		BankAdminImplement BAI = new BankAdminImplement();
+		
 		System.out.println("Please Enter your Username");
-		String user = sc.next();
-		BankAdminImplement BAI = new BankAdminImplement();	
+		user = sc.next();
+			
 		try {
 			Admin c = BAI.getAdmin_UN(user);
-			String actualpassword = c.getPassword();
-			System.out.println("Enter your password\nIf you want to quit login write 'quit'");
+			currentPW = c.getPassword();
+			System.out.println("Enter your password");
 			String password = sc.next();
-			if(actualpassword.equals(password)) {
+			if(currentPW.equals(password)) {
 				AdminSN(BAI);
 			} else if(password.equals("quit")) {
-				startMenu();
+				launchPortal();
 			} else {
 				System.out.println("Incorrect Password");
 				adminLogin();
@@ -97,22 +119,28 @@ public class AppMenu {
 	
 	
 	public static void customerWelcomeSN(Customer c) {
+		int decision;
+		float deposit;
+		float withdraw;
+		float Acc2;
+		
 		BankCustomerImplement CDI = new BankCustomerImplement();
+		
 		System.out.println("Welcome to the Customer Portal");
 		System.out.println("Account Information is being displayed");
 		System.out.println(c.toString());
 		System.out.println("Please choose a selection....");
-		System.out.println("(1) Deposit\n(2) Withdraw\n(3) Apply for a New Account\n(4) Delete an account *Note account MUST BE EMPTY\n(0) To Log Out");
-			int decision = sc.nextInt();
+		System.out.println("(1) Deposit\n(2) Withdraw\n(3) Apply for a New Account\n(4) Delete an account");
+				   decision = sc.nextInt();
 			switch(decision) {
 			case 0: 
 				System.out.println("Exiting customer portal....");
-				startMenu();
+				launchPortal();
 				break;
 			case 1:
 				System.out.println("Welcoem to the cash deposit Portal ");
 				System.out.println("Please set amount to be  deposited...");
-				float deposit = sc.nextFloat();
+						deposit = sc.nextFloat();
 				try {
 					CDI.AccDeposit(c,deposit,sc);
 					System.out.println("Deposit of $" + deposit + " transaction completed");
@@ -122,10 +150,11 @@ public class AppMenu {
 				}
 				customerWelcomeSN(c);
 				break;
+				
 			case 2:
 				System.out.println("Welcome to the cash withdrawal portal.");
 				System.out.println("Please set amount to be withdrawn...");
-				float withdraw = sc.nextFloat();
+				 	withdraw = sc.nextFloat();
 				try {
 					CDI.AccWithdraw(c, withdraw,sc);
 					System.out.println("Withdraw of $" + withdraw + " transaction completed.");
@@ -139,8 +168,8 @@ public class AppMenu {
 				System.out.println("Welcoem to the account creation portal! ");
 				try {
 					System.out.println("Please set amount to be deposited into new account.");
-					float account2 = sc.nextFloat();					
-					CDI.AccApply(c,account2);
+						Acc2 = sc.nextFloat();					
+					CDI.AccApply(c,Acc2);
 					System.out.println("Account creation complete! ");
 				} catch (SQLException e1) {
 					System.out.println("ERROR : Account creation cannot be completed.");
@@ -166,16 +195,18 @@ public class AppMenu {
 	
 	// Administration Portal
 	public static void AdminSN(BankAdminImplement c) {
+		int decision;
+		
 		System.out.println("Bank Administration Portal");
 		System.out.println("Please select an operation");
 		System.out.println("(1) View a User's Information\n(2) View ALL Users\n(3) Create a new account for a User\n"
 				+ "(4) Update a User's Account with the Company\n"
 				+ "(5) Delete ALL Users...\n(0) To Log Out");
-			int decision = sc.nextInt();
+			decision = sc.nextInt();
 			switch(decision) {
 			case 0: 
 				System.out.println("Closing Portal....");
-				startMenu();
+				launchPortal();
 				break;
 			case 1:
 				System.out.println("Account View");
@@ -241,17 +272,23 @@ public class AppMenu {
 	}
 	
 	public static void newCustomerSN() {
+		float Acc1;
+		String F_NAME;
+		String L_NAME; 
+		String U_NAME;
+		String PW;
+		
 		BankAdminImplement BAI = new BankAdminImplement();
 		System.out.println("Please Enter User's First Name");
-		String F_NAME = sc.next();
+		F_NAME = sc.next();
 		System.out.println("Please enter User's Last Name");
-		String L_NAME = sc.next();
+		L_NAME = sc.next();
 		System.out.println("Please enter user name: ");
-		String U_NAME = sc.next();
+		U_NAME = sc.next();
 		System.out.println("Please enter password: ");
-		String PW = sc.next();
+		PW = sc.next();
 		System.out.println("Update value of new account: ");
-		float Acc1 = sc.nextFloat();
+		Acc1 = sc.nextFloat();
 		try {
 			BAI.newCustomer(L_NAME, F_NAME, U_NAME, PW, Acc1);
 			System.out.println("Account Created! \nWelcome!");
@@ -261,30 +298,31 @@ public class AppMenu {
 		}
 	}
 	
-	public static void startMenu() {
+	public static void launchPortal() {
+		int decision;
 		
 		System.out.println("Welcome to Saffron City Bank");
 		System.out.println("Before logging in, please choose one of the following....");
 		System.out.println("(1) New Customer \n(2) Current Customer \n(3) SFC Admin \n(0) To Exit Application");
-		int decision = sc.nextInt();
+		decision = sc.nextInt();
 		
 		switch(decision) {
 		case 0: //Closes out the application
-			System.out.println("Exiting Application\nThank you for chooise SFC Bank");
+			System.out.println("Exiting Application\nThank you for choosing SFC Bank");
 			break;
 		case 1: // Account Creation Portal
 			createCustomer();
 			break;
 		case 2: // Customer Portal
-			customerLogin();
+			currentLogin();
 			break;
-		case 3: // Admin Admin Portal
+		case 3: // Admin Portal
 			adminLogin();
 			break;
 			
 		default:
 			System.out.println("Please make choice or application will reset.");
-			startMenu();
+			launchPortal();
 			break;
 		}	
 	}

@@ -13,28 +13,15 @@ public interface BankAdmin {
 	
 	public static BankConnect cf= BankConnect.getInstance();
 	
-	public Admin getAdmin_UN(String username) throws SQLException;
+	public Admin getAdmin_UN(String U_NAME) throws SQLException;
 	
-	public void newCustomer(String LastName,String FirstName,String userName,String password, float acc1) throws SQLException;
+	public void newCustomer(String L_NAME,String F_NAME,String U_NAME,String PW, float Acc1) throws SQLException;
 	
-	// View User's account information
-	
-	/*	user information
-	 *  names associated with the account
-	 *  balance information
-	 */
-	
-	public Customer viewCustomerUser(String username) throws SQLException;
+
+	public Customer viewCustomerUser(String U_NAME) throws SQLException;
 	
 	public List<Customer> AllCustomers() throws SQLException;
 	
-	// Updating a User's Account
-	
-	/* 
-	 * Deposit/Withdraw from account
-	 * Apply for new Account
-	 * Delete an Account for User (NOT Delete all Users)
-	 */
 	
 	public void updateInfoCustomer(Customer c, Scanner sc) throws SQLException;
 	

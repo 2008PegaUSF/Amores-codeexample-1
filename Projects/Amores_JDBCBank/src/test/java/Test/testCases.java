@@ -1,11 +1,8 @@
 package Test;
 
-import java.sql.SQLException;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import bankBeans.Customer;
 import bankImplements.BankAdminImplement;
 import bankImplements.BankCustomerImplement;
 
@@ -21,7 +18,7 @@ public class testCases {
 		@Test
 		void testDeposit() {
 			BankCustomerImplement ct = new BankCustomerImplement();
-			Assertions.assertEquals(100,ct.DepositIntoAcc(50,50));
+			Assertions.assertEquals(50,ct.DepositIntoAcc(25,25));
 		}
 
 		// checks to see if an input of a negative number will break code
@@ -36,14 +33,14 @@ public class testCases {
 		@Test
 		void testWithdraw() {
 			BankCustomerImplement temp = new BankCustomerImplement();
-			Assertions.assertEquals(100,temp.WithdrawOutofAcc(150,50));
+			Assertions.assertEquals(10,temp.WithdrawOutofAcc(15,5));
 		}
 		
 		// checks if error is caught when over withdrawing out of account 
 		@Test
 		void testWithdrawOver() {
 			BankCustomerImplement temp = new BankCustomerImplement();
-			Assertions.assertEquals(100,temp.WithdrawOutofAcc(100,150));
+			Assertions.assertEquals(10,temp.WithdrawOutofAcc(10,50));
 		}
 
 
