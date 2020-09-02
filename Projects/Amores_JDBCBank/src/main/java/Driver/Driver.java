@@ -1,13 +1,13 @@
 package Driver;
 
-import AppLauncher.MainMenu;
+import AppLauncher.AppMenu;
 
 
 
 public class Driver {
 
 	public static void main(String[] args) {
-		MainMenu.startMenu();
+		AppMenu.startMenu();
 		
 	}
 
